@@ -1,10 +1,13 @@
-import Header from "./components/header/header"
+import { Flex } from '@chakra-ui/react';
+import Header from "./components/header/header";
+import MovieCard from "./components/movie-card/movie-card";
 
 export default function App() {
 
   return (
-    <div className="App">
+    <Flex className="App" direction={'column'}>
       <Header />
-    </div>
+      <MovieCard />
+    </Flex>
   )
 }
