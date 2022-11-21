@@ -1,10 +1,10 @@
-import { Text } from "@chakra-ui/layout"
+import Header from "./components/header/header"
 
 export default function App() {
 
   return (
     <div className="App">
-      <Text color={'#F13'}>Hello world</Text>
+      <Header />
     </div>
   )
 }
