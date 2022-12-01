@@ -26,21 +26,29 @@ export default function App() {
   /* Movie selected to show in sideInformation */
   const [selectedMovie, setSelectedMovie] = useState({})
 
+  const [wordFilter, setWordFilter] = useState('')
+
+  const test = (title: string) => {
+    /* TODO: Add debounce to reduce requests to backend */
+    setWordFilter(title)
+  }
+
   useEffect(() => {
     moviesApi.getMovies({
       pageIndex: currentPage,
       pageSize,
+      title: wordFilter
     }).then(({ data }) => {
       const { items, totalCount } = data
 
       setMovies(items)
       setTotalCount(totalCount)
     })
-  }, [])
+  }, [wordFilter])
 
   return (
     <Flex className="App" direction={'column'} height='100vh' gap={20} padding={2} minWidth={'50%'}>
-      <Header />
+      <Header searchText={test} />
       <Flex height='100%'>
         <Flex flexWrap={'wrap'} gap={'5'}>
           {movies.map(movie => {
