@@ -1,13 +1,14 @@
 import { Flex } from '@chakra-ui/react';
+import { IMovie } from './../../interface/movie.interface';
 import { Text } from '@chakra-ui/layout';
 
-export default function MovieCard() {
-  const imageMock = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/npOnzAbLh6VOIu3naU5QaEcTepo.jpg'
+export default function MovieCard({ movie }: IMovieCard) {
+  const { image, title, producer } = movie
 
   return (
     <Flex>
       <Flex
-        bgImage={imageMock}
+        bgImage={image}
         bgSize={'cover'}
         width={'300px'}
         height={'450px'}
@@ -15,11 +16,15 @@ export default function MovieCard() {
       >
         <Flex marginTop={'auto'} bg='#eeeeee' width='100%' opacity={'80%'} >
           <Flex direction={'column'} color={'#000'} padding={'10px'}>
-            <Text fontSize={'18px'} fontWeight={'600'}>Castle in the sky</Text>
-            <Text fontSize={'14px'} fontWeight={'400'}>Hayao Miyazaki</Text>
+            <Text fontSize={'18px'} fontWeight={'600'}>{title}</Text>
+            <Text fontSize={'14px'} fontWeight={'400'}>{producer}</Text>
           </Flex>
         </Flex>
       </Flex>
     </Flex>
   )
+}
+
+interface IMovieCard {
+  movie: IMovie
 }
