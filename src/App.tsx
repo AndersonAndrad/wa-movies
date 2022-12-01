@@ -24,13 +24,22 @@ export default function App() {
   const [openSide, setOpenSide] = useState(false)
 
   /* Movie selected to show in sideInformation */
-  const [selectedMovie, setSelectedMovie] = useState({})
+  const [selectedMovie, setSelectedMovie] = useState<IMovie | undefined>(undefined)
 
   const [wordFilter, setWordFilter] = useState('')
 
-  const test = (title: string) => {
+  const onChangeTitle = (title: string) => {
     /* TODO: Add debounce to reduce requests to backend */
     setWordFilter(title)
+  }
+
+  const onCloseSide = () => {
+    setOpenSide(false)
+  }
+
+  const onClickMovie = (movie: IMovie) => {
+    setSelectedMovie(movie)
+    setOpenSide(true)
   }
 
   useEffect(() => {
@@ -48,18 +57,23 @@ export default function App() {
 
   return (
     <Flex className="App" direction={'column'} height='100vh' gap={20} padding={2} minWidth={'50%'}>
-      <Header searchText={test} />
+      <Header searchText={onChangeTitle} />
       <Flex height='100%'>
-        <Flex flexWrap={'wrap'} gap={'5'}>
+        {/* <Pagination /> */}
+        <Flex flexWrap={'wrap'} gap={'5'} overflowY='auto' height={'85%'}>
           {movies.map(movie => {
             return (
-              <MovieCard movie={movie} />
+              <MovieCard
+                movie={movie}
+                onClickMovie={onClickMovie}
+              />
             )
           })}
         </Flex>
-        {/* <Pagination /> */}
-        {openSide && <SideDetails />}
-
+        {openSide && <SideDetails
+          movie={selectedMovie}
+          onClick={onCloseSide}
+        />}
       </Flex>
     </Flex>
   )
