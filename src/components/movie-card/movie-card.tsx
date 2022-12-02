@@ -6,18 +6,18 @@ export default function MovieCard({ movie, onClickMovie: onSelectMovie }: IMovie
   const { image, title, producer } = movie
 
   return (
-    <Flex onClick={() => { onSelectMovie(movie) }} cursor='pointer'>
+    <Flex onClick={() => { onSelectMovie(movie) }} cursor='pointer' height={'fit-content'}>
       <Flex
         bgImage={image}
-        bgSize={'cover'}
-        width={'300px'}
-        height={'450px'}
+        bgSize={'contain'}
+        width={'205px'}
+        height={'350px'}
         borderRadius={'4px'}
       >
-        <Flex marginTop={'auto'} bg='#eeeeee' width='100%' opacity={'80%'} >
-          <Flex direction={'column'} color={'#000'} padding={'10px'}>
-            <Text fontSize={'18px'} fontWeight={'600'}>{title}</Text>
-            <Text fontSize={'14px'} fontWeight={'400'}>{producer}</Text>
+        <Flex marginTop={'auto'} bg='#2b2b2b' height={'30%'} width='100%' opacity={'90%'} >
+          <Flex direction={'column'} color={'#fff'} padding={'10px'}>
+            <Text fontSize={'20px'} fontWeight={'600'} textTransform='capitalize'>{title} </Text>
+            <Text fontSize={'16px'} fontWeight={'400'}>{producer}</Text>
           </Flex>
         </Flex>
       </Flex>
