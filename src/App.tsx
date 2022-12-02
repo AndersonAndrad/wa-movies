@@ -5,6 +5,7 @@ import Header from "./components/header/header";
 import { IMovie } from './interface/movie.interface';
 import MovieCard from "./components/movie-card/movie-card";
 import MoviesApi from './api/movies.api';
+import { Pagination } from './components/pagination/pagination';
 import { SideDetails } from './components/side-details/side-details';
 
 export default function App() {
@@ -42,25 +43,30 @@ export default function App() {
     setOpenSide(true)
   }
 
+  const onChangesPage = (page: number) => {
+    setCurrentPage(page)
+  }
+
   useEffect(() => {
     moviesApi.getMovies({
       pageIndex: currentPage,
       pageSize,
-      title: wordFilter
+
     }).then(({ data }) => {
       const { items, totalCount } = data
+
+      console.log(totalCount)
 
       setMovies(items)
       setTotalCount(totalCount)
     })
-  }, [wordFilter])
+  }, [wordFilter, currentPage])
 
   return (
-    <Flex className="App" direction={'column'} height='100vh' gap={20} padding={2} minWidth={'50%'}>
+    <Flex className="App" direction={'column'} height='100vh' padding={2} minWidth={'50%'}>
       <Header searchText={onChangeTitle} />
       <Flex height='100%'>
-        {/* <Pagination /> */}
-        <Flex flexWrap={'wrap'} gap={'5'} overflowY='auto' height={'85%'}>
+        <Flex flexWrap={'wrap'} gap={'5'} overflowY='auto' >
           {movies.map(movie => {
             return (
               <MovieCard
@@ -74,6 +80,14 @@ export default function App() {
           movie={selectedMovie}
           onClick={onCloseSide}
         />}
+      </Flex>
+      <Flex justifyContent={'center'}>
+        <Pagination
+          currentPage={currentPage}
+          totalCount={totalCount}
+          onChangePage={onChangesPage}
+          registerPerPage={pageSize}
+        />
       </Flex>
     </Flex>
   )
