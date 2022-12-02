@@ -8,12 +8,13 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
     <Flex
       width='30%'
       minWidth='25%'
-      maxWidth='35%'
+      maxWidth='25%'
       flexGrow={1}
       direction='column'
-      bg='#f13d13'
+      bg='#3b3b3b'
       padding='10px'
       marginLeft='auto'
+      borderRadius={'4px'}
       gap={2}
     >
       <Flex>
@@ -27,10 +28,10 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
       {movie && <>
         <Image src={movie.movie_banner} />
         <Flex direction='column' gap='10px'>
-          <Text fontSize='24px'>
+          <Text fontSize='28px' fontWeight={'700'} textTransform='capitalize'>
             {movie.title}
           </Text>
-          <Text fontSize='18px'>
+          <Text fontSize='22px'>
             {movie.director}
           </Text>
           <Text>
