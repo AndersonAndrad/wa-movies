@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { IMovie } from '../../interface/movie.interface';
-import { IMovieProps } from '../../interface/IMoviesProps.interface';
+import { IMovieProps } from '../../interface/MoviesProps.interface';
 import MovieCard from '../movie-card/movie-card';
 import MoviesApi from '../../api/movies.api';
 

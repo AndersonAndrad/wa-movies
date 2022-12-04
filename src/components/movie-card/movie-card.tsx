@@ -1,8 +1,10 @@
 import { Flex } from '@chakra-ui/react';
-import { IMovie } from './../../interface/movie.interface';
+import { IMovieCard } from '../../interface/movieCardProps.interface';
 import { Text } from '@chakra-ui/layout';
 
-export default function MovieCard({ movie, onClickMovie: onSelectMovie }: IMovieCard) {
+export default function MovieCard(props: IMovieCard) {
+  const { movie, onClickMovie: onSelectMovie } = props;
+
   const { image, title, producer } = movie
 
   return (
@@ -23,9 +25,4 @@ export default function MovieCard({ movie, onClickMovie: onSelectMovie }: IMovie
       </Flex>
     </Flex>
   )
-}
-
-interface IMovieCard {
-  movie: IMovie
-  onClickMovie: (movie: IMovie) => void
 }

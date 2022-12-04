@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 
+import { IPaginationProps } from "../../interface/PaginationProps.interface";
 import { PaginationButton } from './pagination-button';
 
 function generatePagesArray(from: number, to: number) {
@@ -47,11 +48,4 @@ export function Pagination(props: IPaginationProps) {
       }
     </Flex>
   )
-}
-
-interface IPaginationProps {
-  totalCount: number;
-  registerPerPage: number;
-  currentPage: number;
-  onChangePage: (page: number) => void;
 }

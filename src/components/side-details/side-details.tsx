@@ -1,6 +1,6 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 
-import { IMovie } from "../../interface/movie.interface";
+import { ISideDetailsProps } from "../../interface/SideInformationProps.interface";
 import { VscChromeClose } from 'react-icons/vsc';
 
 export function SideDetails({ movie, onClick }: ISideDetailsProps) {
@@ -42,7 +42,3 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
   )
 }
 
-interface ISideDetailsProps {
-  movie: IMovie | undefined
-  onClick: () => void
-}

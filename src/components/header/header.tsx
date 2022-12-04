@@ -1,5 +1,7 @@
 import { Box, Flex, Input } from '@chakra-ui/react'
 
+import { IHeaderProps } from '../../interface/HeaderProps.interface'
+
 export default function Header({ searchText }: IHeaderProps) {
 
 
@@ -21,6 +23,3 @@ export default function Header({ searchText }: IHeaderProps) {
   )
 }
 
-interface IHeaderProps {
-  searchText: (data: string) => void
-}
