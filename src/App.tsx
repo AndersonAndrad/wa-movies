@@ -53,6 +53,7 @@ export default function App() {
           onClickMovie={onClickMovie}
           totalMovies={setTotalMovies}
           currentPage={currentPage}
+          wordSearch={wordFilter}
         />
         {openSide && <SideDetails
           movie={selectedMovie}

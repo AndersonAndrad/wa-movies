@@ -15,6 +15,7 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
       padding='10px'
       borderRadius={'4px'}
       gap={2}
+      height='100%'
     >
       <Flex>
         <Button
