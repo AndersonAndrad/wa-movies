@@ -5,16 +5,26 @@ import { useEffect, useState } from 'react';
 import { IMovieProps } from '../../interface/MoviesProps.interface';
 import MovieCard from '../movie-card/movie-card';
 import MoviesApi from '../../api/movies.api';
+import { MoviesSkeleton } from './movies.skeleton';
+import { NoMovies } from './no-movies';
 
 export default function Movies(props: IMovieProps) {
   const { onClickMovie, totalMovies, currentPage, wordSearch } = props
 
   const moviesApi = MoviesApi
 
+  const skeletons = []
+
   /* All Movies returned from DB */
   const [movies, setMovies] = useState([] as IMovie[])
 
   const [pageSize, _] = useState(10)
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  for (let index = 0; index < 10; index++) {
+    skeletons.push(<MoviesSkeleton />)
+  }
 
   useEffect(() => {
     const filter: IFilterMovie = {
@@ -26,27 +36,53 @@ export default function Movies(props: IMovieProps) {
       filter['title'] = wordSearch
     }
 
+    setIsLoading(true)
+
     moviesApi.getMovies(filter).then(({ data }) => {
       const { items, totalCount } = data
 
       setMovies(items)
       totalMovies(totalCount)
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500);
     })
   }, [currentPage, wordSearch])
 
+  if (isLoading) {
+    return (
+      <Grid templateColumns={'repeat(5, 1fr)'} gap={6} templateRows={'repeat(2, 1fr)'}>
+        {skeletons.map(skeleton => {
+          return (
+            <GridItem>
+              {skeleton}
+            </GridItem>
+          )
+        })}
+      </Grid>
+    )
+  }
+
+  if (movies.length && !isLoading) {
+    return (
+      <Grid templateColumns={'repeat(5, 1fr)'} gap={6} templateRows={'repeat(2, 1fr)'}>
+        {movies.map(movie => {
+          return (
+            <GridItem>
+              <MovieCard
+                movie={movie}
+                onClickMovie={onClickMovie}
+              />
+            </GridItem>
+          )
+        })}
+      </Grid>
+    )
+  }
+
   return (
-    <Grid templateColumns={'repeat(5, 1fr)'} gap={6} templateRows={'repeat(2, 1fr)'}>
-      {movies.map(movie => {
-        return (
-          <GridItem>
-            <MovieCard
-              movie={movie}
-              onClickMovie={onClickMovie}
-            />
-          </GridItem>
-        )
-      })}
-    </Grid>
+    <NoMovies />
   )
 }
 
