@@ -1,7 +1,7 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 
-import { AiOutlineArrowRight } from 'react-icons/ai';
 import { IMovie } from "../../interface/movie.interface";
+import { VscChromeClose } from 'react-icons/vsc';
 
 export function SideDetails({ movie, onClick }: ISideDetailsProps) {
   return (
@@ -13,7 +13,6 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
       direction='column'
       bg='#3b3b3b'
       padding='10px'
-      marginLeft='auto'
       borderRadius={'4px'}
       gap={2}
     >
@@ -22,7 +21,7 @@ export function SideDetails({ movie, onClick }: ISideDetailsProps) {
           colorScheme={'blackAlpha'}
           onClick={() => onClick()}
         >
-          <AiOutlineArrowRight />
+          <VscChromeClose />
         </Button>
       </Flex>
       {movie && <>
