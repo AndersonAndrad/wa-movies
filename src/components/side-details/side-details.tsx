@@ -1,14 +1,14 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 
-import { ISideDetailsProps } from "../../interface/SideInformationProps.interface";
+import { ISideDetailsProps } from "../../interface/sideInformationProps.interface";
 import { VscChromeClose } from 'react-icons/vsc';
 
 export function SideDetails({ movie, onClick }: ISideDetailsProps) {
   return (
     <Flex
-      width='30%'
-      minWidth='25%'
-      maxWidth='25%'
+      // width='30%'
+      // minWidth='25%'
+      // maxWidth='25%'
       flexGrow={1}
       direction='column'
       bg='#3b3b3b'

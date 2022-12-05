@@ -1,12 +1,20 @@
+import './app.css';
+
 import { Flex } from '@chakra-ui/react';
 import Header from "./components/header/header";
 import { IMovie } from './interface/movie.interface';
 import Movies from './components/movies/movies';
 import { Pagination } from './components/pagination/pagination';
 import { SideDetails } from './components/side-details/side-details';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 export default function App() {
+
+  const variants = {
+    opened: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: 100 },
+  }
 
   const [pageSize, _] = useState(10)
 
@@ -55,10 +63,17 @@ export default function App() {
           currentPage={currentPage}
           wordSearch={wordFilter}
         />
-        {openSide && <SideDetails
-          movie={selectedMovie}
-          onClick={onCloseSide}
-        />}
+        <motion.nav
+          animate={openSide ? "opened" : "closed"}
+          transition={{ duration: 0.90 }}
+          variants={variants}
+          className='motion'
+        >
+          <SideDetails
+            movie={selectedMovie}
+            onClick={onCloseSide}
+          />
+        </motion.nav>
       </Flex>
       <Flex justifyContent={'center'}>
         <Pagination
@@ -71,3 +86,32 @@ export default function App() {
     </Flex>
   )
 }
+
+// import './App.css';
+
+// import { motion } from "framer-motion";
+// import { useState } from 'react';
+
+// export default function App() {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const variants = {
+//     opened: { opacity: 1, x: 0 },
+//     closed: { opacity: 0, x: 50 },
+//   }
+
+//   return (
+//     < >
+//       <button onClick={() => setIsOpen(!isOpen)}>on click</button>
+//       <motion.nav
+//         animate={isOpen ? "opened" : "closed"}
+//         transition={{ duration: 0.5 }}
+//         variants={variants}
+//       >
+//         <div className='container'>
+//           <h1>hello world</h1>
+//         </div>
+//       </motion.nav>
+//     </>
+//   )
+// }
