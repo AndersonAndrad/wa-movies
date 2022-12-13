@@ -19,8 +19,9 @@ clone this repository
 git clone https://github.com/AndersonAndrad/wa-movies-frontend.git
 ```
 
-## Second - Configure enviroments
+## Second - Configure enviroments (Skip this step has a bug with enviroments)
 
+**OBS** - you can change backend uri in this file src/api/movies.api.ts
 clone enviroment and change url backend
 
 ## Third - Install project

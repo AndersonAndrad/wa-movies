@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { IFilterMovie, IMovie } from '../../interface/movie.interface';
 import { useEffect, useState } from 'react';
 
-import { IMovieProps } from '../../interface/MoviesProps.interface';
+import { IMovieProps } from '../../interface/moviesProps.interface';
 import MovieCard from '../movie-card/movie-card';
 import MoviesApi from '../../api/movies.api';
 import { MoviesSkeleton } from './movies.skeleton';
@@ -23,7 +23,7 @@ export default function Movies(props: IMovieProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   for (let index = 0; index < 10; index++) {
-    skeletons.push(<MoviesSkeleton />)
+    skeletons.push({ skeleton: <MoviesSkeleton />, id: index })
   }
 
   useEffect(() => {
@@ -47,15 +47,17 @@ export default function Movies(props: IMovieProps) {
       setTimeout(() => {
         setIsLoading(false)
       }, 500);
+    }).catch(() => {
+      setIsLoading(false)
     })
   }, [currentPage, wordSearch])
 
   if (isLoading) {
     return (
       <Grid templateColumns={'repeat(5, 1fr)'} gap={6} templateRows={'repeat(2, 1fr)'}>
-        {skeletons.map(skeleton => {
+        {skeletons.map(({ skeleton, id }) => {
           return (
-            <GridItem>
+            <GridItem key={id}>
               {skeleton}
             </GridItem>
           )
@@ -69,7 +71,7 @@ export default function Movies(props: IMovieProps) {
       <Grid templateColumns={'repeat(5, 1fr)'} gap={6} templateRows={'repeat(2, 1fr)'}>
         {movies.map(movie => {
           return (
-            <GridItem>
+            <GridItem key={movie._id}>
               <MovieCard
                 movie={movie}
                 onClickMovie={onClickMovie}
